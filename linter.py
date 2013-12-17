@@ -27,7 +27,7 @@ class Recess(Linter):
         $'''
     # multiline = False
     # line_col_base = (1, 1)
-    tempfile_suffix = 'less'
+    # tempfile_suffix = 'less'
     # error_stream = util.STREAM_STDOUT
     # selectors = {}
     # word_re = None
@@ -64,14 +64,26 @@ class Recess(Linter):
 
         include_path = '--includePath {}'.format(os.path.dirname(self.filename))
 
-        result = (
-            'recess',
-            '--format compact',
-            '--stripColors true',
-            '--noSummary true',
-            '--strictPropertyOrder false',
-            include_path)
+        # TODO: The parameters are ignored if passed as a tuple, but
+        # work fine as a string. No idea why.
 
-        # result = 'recess --format compact --stripColors true --noSummary true --strictPropertyOrder false \'{}\' '.format(include_path)
+        # result = [
+        #     'recess',
+        #     self.filename,
+        #     '--format compact',
+        #     '--stripColors true',
+        #     '--noSummary true',
+        #     '--strictPropertyOrder false',
+        #     '--compile false',
+        #     '--compress false',
+        #     include_path]
+
+        result = 'recess \'{}\' \
+            --format compact \
+            --stripColors true \
+            --noSummary true \
+            --strictPropertyOrder false \
+            --compile false \
+            --compress false \'{}\''.format(self.filename, include_path)
 
         return result
