@@ -1,0 +1,6 @@
+SublimeLinter-recess
+-------------------------------
+
+This linter plugin for SublimeLinter provides an interface to recess.
+
+For more information, please see https://github.com/dflock/SublimeLinter-recess.
