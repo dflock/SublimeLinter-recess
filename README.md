@@ -8,7 +8,7 @@ This linter plugin for [SublimeLinter](https://github.com/SublimeLinter/SublimeL
 ### Linter installation
 Before installing this plugin, you must ensure that `recess` is installed on your system. To install `recess`, do the following:
 
-1. Install [NodeJs](http://nodejs.org/) and [NPM](https://npmjs.org/):
+1. Install [Node.js](http://nodejs.org/) and [npm](https://npmjs.org/):
 
     On Debian/Ubuntu you can do that like this:
     ```
@@ -16,11 +16,14 @@ Before installing this plugin, you must ensure that `recess` is installed on you
     sudo ln -s /usr/bin/nodejs /usr/bin/node
 
     ```
+    TODO: Windows & Mac
 
 1. Install `recess` by typing the following in a terminal:
+    On Debian/Ubuntu you can do that like this:
     ```
     sudo npm install recess -g
     ```
+    TODO: Windows & Mac
 
 Now you can proceed to install the SublimeLinter-recess plugin.
 
