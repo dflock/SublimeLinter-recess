@@ -19,8 +19,7 @@ class Recess(Linter):
     """Provides an interface to recess."""
 
     syntax = 'less'
-    cmd = 'recess --format compact --stripColors true --noSummary true --strictPropertyOrder false --includePath %s *' % '.'
-    # executable = None
+    executable = 'recess'
     regex = r'''(?xi)
         ^.+:                        # filename
         (?P<line>\d+|undefined):    # line
@@ -59,3 +58,17 @@ class Recess(Linter):
             near = message.split('"')[1::2]
 
         return match, line, col, error, warning, message, near
+
+    def cmd(self):
+        """Return a tuple with the command line to execute."""
+
+        inc = ' --includePath %s' % os.path.split(self.filename)[0]
+        # result = [
+        #     'recess',
+        #     '--format compact',
+        #     '--stripColors true',
+        #     '--noSummary true',
+        #     '--strictPropertyOrder false',
+        #     inc]
+        result = 'recess --format compact --stripColors true --noSummary true --strictPropertyOrder false' + inc
+        return result
