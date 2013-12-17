@@ -62,13 +62,16 @@ class Recess(Linter):
     def cmd(self):
         """Return a tuple with the command line to execute."""
 
-        inc = ' --includePath %s' % os.path.split(self.filename)[0]
-        # result = [
-        #     'recess',
-        #     '--format compact',
-        #     '--stripColors true',
-        #     '--noSummary true',
-        #     '--strictPropertyOrder false',
-        #     inc]
-        result = 'recess --format compact --stripColors true --noSummary true --strictPropertyOrder false' + inc
+        include_path = '--includePath {}'.format(os.path.dirname(self.filename))
+
+        result = (
+            'recess',
+            '--format compact',
+            '--stripColors true',
+            '--noSummary true',
+            '--strictPropertyOrder false',
+            include_path)
+
+        # result = 'recess --format compact --stripColors true --noSummary true --strictPropertyOrder false \'{}\' '.format(include_path)
+
         return result
