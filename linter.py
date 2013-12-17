@@ -12,6 +12,7 @@
 
 from SublimeLinter.lint import Linter, highlight
 import os
+# import re
 
 
 class Recess(Linter):
@@ -20,11 +21,24 @@ class Recess(Linter):
 
     syntax = 'less'
     executable = 'recess'
+
+    # Parses recess output, expects it to look something like this:
+    #   demo.less:1:Universal selectors should be avoided
     regex = r'''(?xi)
         ^.+?:                        # filename
         (?P<line>\d+?|undefined):    # line
         (?P<message>.*)              # message
         $'''
+
+    # TODO: The above regex doesn't catch actual errors, because recess outputs
+    # those in a completely different format from warnings. They look like this:
+    #   Parse error: .box-shadow is undefined on line 91
+    # The regex below works, but you can't have multiple match groups with the same name:
+    # regex = r'(?:(^.+?:(?P<line>\d+|undefined):(?P<message>.*))|((?P<error>.*?)line (?P<line2>\d+)))$'
+
+    # To fix this, maybe change the regex to '^(?P<message>.*)$' and do all custom
+    # parsing inside split_match()?
+
     tempfile_suffix = 'less'
     default_type = highlight.WARNING
 
@@ -53,7 +67,7 @@ class Recess(Linter):
         """Return a tuple with the command line to execute.
 
         We override this method so we can properly set the --includePath
-        parameter.
+        parameter, because out lint target will be in /tmp.
         """
 
         include_path = '--includePath={}'.format(os.path.dirname(self.filename))
