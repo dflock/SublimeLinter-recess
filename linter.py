@@ -11,6 +11,7 @@
 """This module exports the Recess plugin class."""
 
 from SublimeLinter.lint import Linter, highlight
+import platform
 import os
 # import re
 
@@ -72,8 +73,12 @@ class Recess(Linter):
 
         include_path = '--includePath={}'.format(os.path.dirname(self.filename))
 
+        executable = 'recess'
+        if platform.system() == 'Windows':
+            executable += '.cmd'
+
         result = [
-            'recess',
+            executable,
             '--format=compact',
             '--stripColors=true',
             '--noSummary=true',
