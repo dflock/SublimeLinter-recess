@@ -1,3 +1,15 @@
+# PLEASE NOTE: Not available in Package Control, also: DOESN'T REALLY WORK
+
+This isn't quite finished, which is why it's not available in Package Control.
+
+One of the reasons that this plugin isn't finished, is that since writing this I've discovered that recess is basically unmaintained.
+
+In addition, recess returns output in a different format if there's a CSS/LESS syntax error, rather than a warning - it ignores it's `--format` parameter in this case.
+
+Perhaps worse is the fact that recess doesn't actually lint - **or even look at** - the actual less file. It compiles the less to css, then lints that - so the line numbers you get back only vaguely match the original less file and the messages are often not very relevant.
+
+**All in all, I'm inclined to delete this repo - unless someone else want to take this on?**
+
 SublimeLinter-recess
 =========================
 
